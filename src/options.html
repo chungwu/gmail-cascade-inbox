@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <style type="text/css">
+      html, body {
+          color: #333;
+          font-size: 14px;
+          padding: 0 5px;
+          max-height: 400px;
+          overflow: auto;
+          margin: 0;
+      }
+
+      a {
+          color: #36c;
+          cursor: pointer;
+          text-decoration: none;
+      }
+      a: hover {
+          text-decoration: underline;
+      }
+      input {
+          font-size: 14px;
+          padding: 5px;
+          width: 100%;
+      }
+      label {
+          margin: 5px 0;
+          display: block;
+      }
+      form {
+          margin-top: 10px;
+      }
+      .form-row {
+          margin: 20px 0;
+      }
+      .form-row:first-child {
+          margin-top: 0;
+      }
+      .form-row:last-child {
+          margin-bottom: 0;
+      }
+      .form-note {
+          font-size: 12px;
+          color: #888;
+          margin-top: 5px;
+      }
+      .form-help {
+          display: none;
+          margin-bottom:5px;
+      }
+      .help-icon {
+          display: inline-block;
+          background-image: url("icons/help.png");
+          height: 12px;
+          width: 12px;
+          background-size: 12px;
+          vertical-align: middle;
+          cursor: pointer;
+          margin-left: 5px;
+      }      
+      .message {
+          padding: 10px;
+          margin: 10px;
+          background-color: #ffffcc;
+          font-weight: bold;
+          display: none;
+      }
+      .remove-button {
+          color: #B71C1C;
+          float: right;
+      }
+      h6 {
+          margin: 0;
+          padding: 0;
+          text-transform: uppercase;
+          font-size: 14px;
+          color: #aaa;
+      }
+      .cascades-instance {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin: 10px 0;
+          background-color: #fdfdfd;
+      }
+      table.sections-table {
+          width: 500px;
+      }
+      table.sections-table th {
+          font-size: 12px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: #888;
+      }
+      table.sections-table th, table.sections-table td {
+          padding: 5px;
+          text-align: center;
+      }
+      button {
+          padding: 5px 10px;
+          margin-top: 10px;
+          background: #fff;
+      }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>        
+    <script type="text/javascript" src="js/options.js"></script>    
+  </head>
+  <body>
+    <h1>Gmail Cascading Inbox Setup</h1>
+    <form class="options-form">
+      <div class="message"></div>
+      <div id="cascades-instances-group" class="cascades-instances-group"></div>
+      <a class="add-cascades">&#43; Add another Gmail account</a>
+      <div><button action="submit">Save</button>
+    </form>
+
+    <div style="display: none" id="cascades-instance-template" class="cascades-instance">
+      <div class="form-row cascades-instance-header">
+        <a class="remove-button remove-cascades-instance">&#x2796; Remove this Gmail account</a>
+        <h6>Gmail account</h6>
+      </div>
+      <div class="form-row">
+        <label>Gmail address <span class="help-icon"></span></label>
+        <input name="cascadesInstances[${index}][address]"></input>
+      </div>
+      <div class="form-note form-help">
+        The Gmail address that you want this extension to run for.
+      </div>
+      <div class="form-row">
+        <label>Inbox sections</label>
+        <table class="sections-table">
+          <thead>
+            <tr>
+              <th>Inbox section name</th>
+              <th style="width: 50px;">Max emails to show</th>
+              <th>Delete</th></tr>
+          </thead>
+          <tbody class="sections-table-body">
+          </tbody>
+        </table>
+        <a class="add-section">&#43; Add a section</a>
+      </div>
+    </div>
+    <table style="display: none">
+      <tr style="display: none" id="section-template" class="section-row">
+        <td>
+          <input name="cascadesInstances[${index}][sections][${sectionIndex}][name]"></input>
+        </td>
+        <td>
+          <input name="cascadesInstances[${index}][sections][${sectionIndex}][limit]"></input>
+        </td>
+        <td>
+          <a class="delete-section">&#x2796;</a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

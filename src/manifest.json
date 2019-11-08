@@ -1,0 +1,28 @@
+{
+  "name": "Gmail Cascading Inbox",
+  "short_name": "Gmail Cascading Inbox",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "description": "Extension for adding Gerrit integration to Gmail.",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "content_scripts": [{
+    "js": [
+      "js/jquery-3.3.1.min.js", 
+      "js/underscore-min.js", 
+      "js/util.js",
+      "js/cascade.js"
+    ],
+    "matches": ["https://mail.google.com/*"]
+  }],
+  "permissions": [
+    "cookies",
+    "tabs",
+    "storage", 
+    "http://*/", "https://*/"
+  ],
+  "web_accessible_resources": [
+    "icons/help.png"
+  ]  
+}
